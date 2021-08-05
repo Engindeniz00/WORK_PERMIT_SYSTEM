@@ -29,9 +29,9 @@ namespace WORK_PERMIT_SYSSTEM
             string sorgu = @"SELECT dbPersonelKullanici.*,dbPersonelKullanici.PersonelAdi + ' ' + dbPersonelKullanici.PersonelSoyadi as PersonelKullaniciAdi FROM dbPersonelKullanici ORDER BY PersonelKullaniciAdi ASC";
             DataTable dtTable = new DataTable();
             dtTable = Utils.TabloGetir(sorgu);
-            kullaniciKombox.DataSource = dtTable;
             kullaniciKombox.DisplayMember = "PersonelKullaniciAdi";
-            kullaniciKombox.ValueMember = "Id";
+            kullaniciKombox.ValueMember = "Id";           
+            kullaniciKombox.DataSource = dtTable;
         }
 
         private void RememberCheckBoxKayit()
@@ -103,6 +103,7 @@ namespace WORK_PERMIT_SYSSTEM
                 RememberCheckBoxKayit();
                 Utils.KullaniciId = Convert.ToInt32(kullaniciKombox.SelectedValue);
                 Utils.KullaniciAdi = kullaniciKombox.Text;
+                Utils.izinIndex = kullaniciKombox.SelectedIndex;
                 FrmIzınBelgesi frmIzınBelgesi = new FrmIzınBelgesi();
                 this.Hide();
                 frmIzınBelgesi.ShowDialog();
