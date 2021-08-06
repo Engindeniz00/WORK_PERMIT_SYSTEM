@@ -34,7 +34,7 @@ namespace WORK_PERMIT_SYSSTEM
             this.onayKombox = new System.Windows.Forms.ComboBox();
             this.iptNedenText = new System.Windows.Forms.TextBox();
             this.iptaButon = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.onaylaButon = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -66,6 +66,7 @@ namespace WORK_PERMIT_SYSSTEM
             this.onayKombox.Name = "onayKombox";
             this.onayKombox.Size = new System.Drawing.Size(313, 39);
             this.onayKombox.TabIndex = 2;
+            this.onayKombox.SelectedIndexChanged += new System.EventHandler(this.onayKombox_SelectedIndexChanged);
             // 
             // iptNedenText
             // 
@@ -87,22 +88,23 @@ namespace WORK_PERMIT_SYSSTEM
             this.iptaButon.UseVisualStyleBackColor = true;
             this.iptaButon.Click += new System.EventHandler(this.iptaButon_Click);
             // 
-            // button1
+            // onaylaButon
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button1.Location = new System.Drawing.Point(146, 357);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(204, 66);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "ONAYLA";
-            this.button1.UseVisualStyleBackColor = true;
+            this.onaylaButon.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.onaylaButon.Location = new System.Drawing.Point(146, 357);
+            this.onaylaButon.Name = "onaylaButon";
+            this.onaylaButon.Size = new System.Drawing.Size(204, 66);
+            this.onaylaButon.TabIndex = 5;
+            this.onaylaButon.Text = "ONAYLA";
+            this.onaylaButon.UseVisualStyleBackColor = true;
+            this.onaylaButon.Click += new System.EventHandler(this.onaylaButon_Click);
             // 
             // FrmDurumDegistir
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(791, 460);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.onaylaButon);
             this.Controls.Add(this.iptaButon);
             this.Controls.Add(this.iptNedenText);
             this.Controls.Add(this.onayKombox);
@@ -123,6 +125,6 @@ namespace WORK_PERMIT_SYSSTEM
         private System.Windows.Forms.ComboBox onayKombox;
         private System.Windows.Forms.TextBox iptNedenText;
         private System.Windows.Forms.Button iptaButon;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button onaylaButon;
     }
 }

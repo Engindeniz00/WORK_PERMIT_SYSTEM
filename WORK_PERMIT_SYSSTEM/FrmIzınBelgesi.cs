@@ -19,7 +19,7 @@ namespace WORK_PERMIT_SYSSTEM
             InitializeComponent();
         }
 
-        private void FrmIzınBelgesi_Load(object sender, EventArgs e)
+        public void FrmIzınBelgesi_Load(object sender, EventArgs e)
         {
             KomboBoxVeriGetir();
             VerileriGoster();
@@ -157,10 +157,44 @@ namespace WORK_PERMIT_SYSSTEM
 
         private void VerileriGoster()
         {
-            string sorgu = @"SELECT pr.PersonelAdi + ' ' + pr.PersonelSoyadi as AdiSoyadi,iz.*,dr.DurumAdi,dr.DurumKodu,du.UnvanAdi FROM dbPersonelKullanici as pr 
+            string sorgu = "";
+            switch (Utils.personelUnvanId)
+            {
+                case 1:
+                     sorgu = @"SELECT pr.PersonelAdi + ' ' + pr.PersonelSoyadi as AdiSoyadi,iz.*,dr.DurumAdi,dr.DurumKodu,du.UnvanAdi,du.Id as 'UnvanID' FROM dbPersonelKullanici as pr 
                              INNER JOIN dbIzinler as iz ON pr.Id = iz.PersonelId
                              INNER JOIN dbDurum as dr ON dr.Id = iz.DurumId   
-                             INNER JOIN dbUnvan as du ON du.Id = pr.PersonelUnvanID ";
+                             INNER JOIN dbUnvan as du ON du.Id = pr.PersonelUnvanID
+                             ";
+                    break;
+                case 2:
+                     sorgu = @"SELECT pr.PersonelAdi + ' ' + pr.PersonelSoyadi as AdiSoyadi,iz.*,dr.DurumAdi,dr.DurumKodu,du.UnvanAdi,du.Id as 'UnvanID' FROM dbPersonelKullanici as pr 
+                             INNER JOIN dbIzinler as iz ON pr.Id = iz.PersonelId
+                             INNER JOIN dbDurum as dr ON dr.Id = iz.DurumId   
+                             INNER JOIN dbUnvan as du ON du.Id = pr.PersonelUnvanID 
+                             ";
+                    break;
+
+                case 3:
+                    sorgu = @"SELECT pr.PersonelAdi + ' ' + pr.PersonelSoyadi as AdiSoyadi,iz.*,dr.DurumAdi,dr.DurumKodu,du.UnvanAdi,du.Id as 'UnvanID' FROM dbPersonelKullanici as pr 
+                        INNER JOIN dbIzinler as iz ON pr.Id = iz.PersonelId
+                        INNER JOIN dbDurum as dr ON dr.Id = iz.DurumId   
+                        INNER JOIN dbUnvan as du ON du.Id = pr.PersonelUnvanID
+                        WHERE iz.DurumId = 2";
+                    break;
+
+                case 4:
+                    sorgu = @"SELECT pr.PersonelAdi + ' ' + pr.PersonelSoyadi as AdiSoyadi,iz.*,dr.DurumAdi,dr.DurumKodu,du.UnvanAdi,du.Id as 'UnvanID' FROM dbPersonelKullanici as pr 
+                      INNER JOIN dbIzinler as iz ON pr.Id = iz.PersonelId
+                      INNER JOIN dbDurum as dr ON dr.Id = iz.DurumId   
+                      INNER JOIN dbUnvan as du ON du.Id = pr.PersonelUnvanID
+                      WHERE iz.DurumId = 3";
+                    break;
+
+                default:
+                    return;
+            }
+            
             DataTable dtTable = new DataTable();
             dtTable = Utils.TabloGetir(sorgu);
 
@@ -181,7 +215,19 @@ namespace WORK_PERMIT_SYSSTEM
                     item.SubItems.Add(dtTable.Rows[i]["IseBaslamaTarihSaat"].ToString());
                     item.SubItems.Add(dtTable.Rows[i]["IzinSebep"].ToString());
                     item.SubItems.Add(dtTable.Rows[i]["DurumAdi"].ToString());
+                    item.SubItems.Add(dtTable.Rows[i]["DurumId"].ToString());
+                    item.SubItems.Add(dtTable.Rows[i]["UnvanID"].ToString());
+                    item.SubItems.Add(dtTable.Rows[i]["Id"].ToString());
                     kullaniciIzinListe.Items.Add(item);
+
+                    if(Convert.ToInt32(kullaniciIzinListe.Items[i].SubItems[11].Text) == 1003)
+                    {
+                        kullaniciIzinListe.Items[i].BackColor = Color.Red;
+                    }
+                    else if(Convert.ToInt32(kullaniciIzinListe.Items[i].SubItems[11].Text) == 1)
+                    {
+                        kullaniciIzinListe.Items[i].BackColor = Color.Green;
+                    }
                 }
             }
         }
@@ -203,11 +249,35 @@ namespace WORK_PERMIT_SYSSTEM
 
         private void durumButon_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            FrmDurumDegistir frmDurumDegistir = new FrmDurumDegistir();
-            frmDurumDegistir.ShowDialog();
-            this.Show();
+            if(Utils.izinBelgeSelectedIndex > -1)
+            {
+                this.Hide();
+                FrmDurumDegistir frmDurumDegistir = new FrmDurumDegistir();
+                frmDurumDegistir.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Lütfen bir kişi seçiniz", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
+        }
+
+        private void kullaniciIzinListe_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tablodanVerileriCek();
+        }
+
+        private void tablodanVerileriCek()
+        {
+            Utils.izinBelgeSelectedIndex = kullaniciIzinListe.FocusedItem.Index;
+
+            Utils.izinBelgeSelectedPersonelID = Convert.ToInt32(kullaniciIzinListe.Items[Utils.izinBelgeSelectedIndex].Text);
+
+            Utils.izinBelgeSelectedDurumID = Convert.ToInt32(kullaniciIzinListe.Items[Utils.izinBelgeSelectedIndex].SubItems[11].Text);
+
+            Utils.izinBelgeSelectedUnvanID = Convert.ToInt32(kullaniciIzinListe.Items[Utils.izinBelgeSelectedIndex].SubItems[12].Text);
+
+            Utils.izinBelgeSelectedIzinID = Convert.ToInt32(kullaniciIzinListe.Items[Utils.izinBelgeSelectedIndex].SubItems[13].Text);
         }
     }
 }

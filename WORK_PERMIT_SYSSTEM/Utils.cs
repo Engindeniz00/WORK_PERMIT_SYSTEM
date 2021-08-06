@@ -17,6 +17,12 @@ namespace WORK_PERMIT_SYSSTEM
         public static string KullaniciAdi;
         public static int izinIndex;
         public static int izinKullaniciId;
+        public static int personelUnvanId;
+        public static int izinBelgeSelectedIndex;
+        public static int izinBelgeSelectedPersonelID;
+        public static int izinBelgeSelectedDurumID;
+        public static int izinBelgeSelectedUnvanID;
+        public static int izinBelgeSelectedIzinID;
        
         #endregion variables
 

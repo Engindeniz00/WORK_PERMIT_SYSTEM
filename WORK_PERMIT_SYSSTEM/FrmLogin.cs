@@ -32,6 +32,8 @@ namespace WORK_PERMIT_SYSSTEM
             kullaniciKombox.DisplayMember = "PersonelKullaniciAdi";
             kullaniciKombox.ValueMember = "Id";           
             kullaniciKombox.DataSource = dtTable;
+
+            Utils.personelUnvanId = Convert.ToInt32(((DataTable)kullaniciKombox.DataSource).Rows[kullaniciKombox.SelectedIndex]["PersonelUnvanID"].ToString());
         }
 
         private void RememberCheckBoxKayit()
@@ -126,6 +128,8 @@ namespace WORK_PERMIT_SYSSTEM
             if(kullaniciKombox.SelectedIndex > 0)
             {
                 sifreText.Focus();
+
+                Utils.personelUnvanId = Convert.ToInt32(((DataTable)kullaniciKombox.DataSource).Rows[kullaniciKombox.SelectedIndex]["PersonelUnvanID"].ToString());
             }
             else
             {

@@ -56,6 +56,7 @@ namespace WORK_PERMIT_SYSSTEM
             this.kullaniciIzinListe = new System.Windows.Forms.ListView();
             this.personelId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.personelAdSoyad = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.personelUnvanAdi = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.izinTürü = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.baslamaSaat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.bitisSaat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -65,7 +66,9 @@ namespace WORK_PERMIT_SYSSTEM
             this.izinSebep = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.izinDurum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.durumButon = new System.Windows.Forms.Button();
-            this.personelUnvanAdi = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.durumId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.personelUnvanID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.izinID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -355,7 +358,11 @@ namespace WORK_PERMIT_SYSSTEM
             this.topSaat,
             this.isBaslamaSaat,
             this.izinSebep,
-            this.izinDurum});
+            this.izinDurum,
+            this.durumId,
+            this.personelUnvanID,
+            this.izinID});
+            this.kullaniciIzinListe.FullRowSelect = true;
             this.kullaniciIzinListe.HideSelection = false;
             this.kullaniciIzinListe.Location = new System.Drawing.Point(61, 535);
             this.kullaniciIzinListe.Name = "kullaniciIzinListe";
@@ -363,6 +370,7 @@ namespace WORK_PERMIT_SYSSTEM
             this.kullaniciIzinListe.TabIndex = 28;
             this.kullaniciIzinListe.UseCompatibleStateImageBehavior = false;
             this.kullaniciIzinListe.View = System.Windows.Forms.View.Details;
+            this.kullaniciIzinListe.SelectedIndexChanged += new System.EventHandler(this.kullaniciIzinListe_SelectedIndexChanged);
             // 
             // personelId
             // 
@@ -373,6 +381,12 @@ namespace WORK_PERMIT_SYSSTEM
             // 
             this.personelAdSoyad.Text = "Personel Ad Soyad";
             this.personelAdSoyad.Width = 132;
+            // 
+            // personelUnvanAdi
+            // 
+            this.personelUnvanAdi.Text = "Ünvan Adı";
+            this.personelUnvanAdi.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.personelUnvanAdi.Width = 100;
             // 
             // izinTürü
             // 
@@ -426,11 +440,20 @@ namespace WORK_PERMIT_SYSSTEM
             this.durumButon.UseVisualStyleBackColor = true;
             this.durumButon.Click += new System.EventHandler(this.durumButon_Click);
             // 
-            // personelUnvanAdi
+            // durumId
             // 
-            this.personelUnvanAdi.Text = "Ünvan Adı";
-            this.personelUnvanAdi.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.personelUnvanAdi.Width = 100;
+            this.durumId.Text = "";
+            this.durumId.Width = 0;
+            // 
+            // personelUnvanID
+            // 
+            this.personelUnvanID.Text = "";
+            this.personelUnvanID.Width = 0;
+            // 
+            // izinID
+            // 
+            this.izinID.Text = "0";
+            this.izinID.Width = 0;
             // 
             // FrmIzınBelgesi
             // 
@@ -509,5 +532,8 @@ namespace WORK_PERMIT_SYSSTEM
         private System.Windows.Forms.ColumnHeader izinDurum;
         private System.Windows.Forms.Button durumButon;
         private System.Windows.Forms.ColumnHeader personelUnvanAdi;
+        private System.Windows.Forms.ColumnHeader durumId;
+        private System.Windows.Forms.ColumnHeader personelUnvanID;
+        private System.Windows.Forms.ColumnHeader izinID;
     }
 }
