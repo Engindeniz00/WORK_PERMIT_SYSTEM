@@ -65,10 +65,10 @@ namespace WORK_PERMIT_SYSSTEM
             this.isBaslamaSaat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.izinSebep = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.izinDurum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.durumButon = new System.Windows.Forms.Button();
             this.durumId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.personelUnvanID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.izinID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.durumButon = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -347,6 +347,9 @@ namespace WORK_PERMIT_SYSSTEM
             // 
             // kullaniciIzinListe
             // 
+            this.kullaniciIzinListe.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.kullaniciIzinListe.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.personelId,
             this.personelAdSoyad,
@@ -366,7 +369,7 @@ namespace WORK_PERMIT_SYSSTEM
             this.kullaniciIzinListe.HideSelection = false;
             this.kullaniciIzinListe.Location = new System.Drawing.Point(61, 535);
             this.kullaniciIzinListe.Name = "kullaniciIzinListe";
-            this.kullaniciIzinListe.Size = new System.Drawing.Size(1090, 329);
+            this.kullaniciIzinListe.Size = new System.Drawing.Size(1242, 285);
             this.kullaniciIzinListe.TabIndex = 28;
             this.kullaniciIzinListe.UseCompatibleStateImageBehavior = false;
             this.kullaniciIzinListe.View = System.Windows.Forms.View.Details;
@@ -429,17 +432,6 @@ namespace WORK_PERMIT_SYSSTEM
             this.izinDurum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.izinDurum.Width = 99;
             // 
-            // durumButon
-            // 
-            this.durumButon.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.durumButon.Location = new System.Drawing.Point(743, 433);
-            this.durumButon.Name = "durumButon";
-            this.durumButon.Size = new System.Drawing.Size(123, 77);
-            this.durumButon.TabIndex = 29;
-            this.durumButon.Text = "Durum Değiştir";
-            this.durumButon.UseVisualStyleBackColor = true;
-            this.durumButon.Click += new System.EventHandler(this.durumButon_Click);
-            // 
             // durumId
             // 
             this.durumId.Text = "";
@@ -455,11 +447,22 @@ namespace WORK_PERMIT_SYSSTEM
             this.izinID.Text = "0";
             this.izinID.Width = 0;
             // 
+            // durumButon
+            // 
+            this.durumButon.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.durumButon.Location = new System.Drawing.Point(743, 433);
+            this.durumButon.Name = "durumButon";
+            this.durumButon.Size = new System.Drawing.Size(123, 77);
+            this.durumButon.TabIndex = 29;
+            this.durumButon.Text = "Durum Değiştir";
+            this.durumButon.UseVisualStyleBackColor = true;
+            this.durumButon.Click += new System.EventHandler(this.durumButon_Click);
+            // 
             // FrmIzınBelgesi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1260, 886);
+            this.ClientSize = new System.Drawing.Size(1315, 832);
             this.Controls.Add(this.durumButon);
             this.Controls.Add(this.kullaniciIzinListe);
             this.Controls.Add(this.iptalButon);

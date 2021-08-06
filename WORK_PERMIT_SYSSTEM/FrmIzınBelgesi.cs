@@ -251,9 +251,9 @@ namespace WORK_PERMIT_SYSSTEM
         {
             if(Utils.izinBelgeSelectedIndex > -1)
             {
-                this.Hide();
                 FrmDurumDegistir frmDurumDegistir = new FrmDurumDegistir();
                 frmDurumDegistir.ShowDialog();
+                FrmIzınBelgesi_Load(sender, e);
             }
             else
             {

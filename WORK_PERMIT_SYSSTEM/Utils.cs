@@ -11,7 +11,7 @@ namespace WORK_PERMIT_SYSSTEM
     public static class Utils
     {
         #region variables
-        private static string baglantiAdr = "Data Source=DESKTOP-7SDHT04;Initial Catalog=IZINYONETIMSISTEMI;Integrated Security=True";
+        private static string baglantiAdr = "Data Source=.;Initial Catalog=IZINYONETIMSISTEMI;Integrated Security=True";
         private static SqlConnection sqlConnection;
         public static int KullaniciId;
         public static string KullaniciAdi;
