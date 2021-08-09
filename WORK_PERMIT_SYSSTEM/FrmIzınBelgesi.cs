@@ -27,11 +27,11 @@ namespace WORK_PERMIT_SYSSTEM
 
         private void KomboBoxVeriGetir()
         {
-            string sorgu = @"SELECT pr.*,pr.PersonelAdi + ' ' + pr.PersonelSoyadi as PersonelKullaniciAdi,du.UnvanAdi FROM dbPersonelKullanici as pr
+            string sorgu = @"SELECT pr.*,pr.PersonelAdi || ' ' || pr.PersonelSoyadi as PersonelKullaniciAdi,du.UnvanAdi FROM dbPersonelKullanici as pr
                              INNER JOIN dbUnvan as du ON du.Id = pr.PersonelUnvanID
                              ORDER BY PersonelKullaniciAdi ASC";
             DataTable dtTable = new DataTable();
-            dtTable = Utils.TabloGetir(sorgu);
+            dtTable = SQLiteUtils.TabloGetir(sorgu);
             kullaniciIzinKombox.DisplayMember = "PersonelKullaniciAdi";
             kullaniciIzinKombox.ValueMember = "Id";
             kullaniciIzinKombox.DataSource = dtTable;
@@ -102,7 +102,7 @@ namespace WORK_PERMIT_SYSSTEM
                                 return;
                             }
 
-                            if (Utils.SorguCalistir(sorgu))
+                            if (SQLiteUtils.SorguCalistir(sorgu))
                             {
                                 MessageBox.Show("İzin başarılı bir şekilde kaydedildi", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 ClearBoxes();
@@ -161,14 +161,14 @@ namespace WORK_PERMIT_SYSSTEM
             switch (Utils.personelUnvanId)
             {
                 case 1:
-                     sorgu = @"SELECT pr.PersonelAdi + ' ' + pr.PersonelSoyadi as AdiSoyadi,iz.*,dr.DurumAdi,dr.DurumKodu,du.UnvanAdi,du.Id as 'UnvanID' FROM dbPersonelKullanici as pr 
+                     sorgu = @"SELECT pr.PersonelAdi || ' ' || pr.PersonelSoyadi as AdiSoyadi,iz.*,dr.DurumAdi,dr.DurumKodu,du.UnvanAdi,du.Id as 'UnvanID' FROM dbPersonelKullanici as pr 
                              INNER JOIN dbIzinler as iz ON pr.Id = iz.PersonelId
                              INNER JOIN dbDurum as dr ON dr.Id = iz.DurumId   
                              INNER JOIN dbUnvan as du ON du.Id = pr.PersonelUnvanID
                              ";
                     break;
                 case 2:
-                     sorgu = @"SELECT pr.PersonelAdi + ' ' + pr.PersonelSoyadi as AdiSoyadi,iz.*,dr.DurumAdi,dr.DurumKodu,du.UnvanAdi,du.Id as 'UnvanID' FROM dbPersonelKullanici as pr 
+                     sorgu = @"SELECT pr.PersonelAdi || ' ' || pr.PersonelSoyadi as AdiSoyadi,iz.*,dr.DurumAdi,dr.DurumKodu,du.UnvanAdi,du.Id as 'UnvanID' FROM dbPersonelKullanici as pr 
                              INNER JOIN dbIzinler as iz ON pr.Id = iz.PersonelId
                              INNER JOIN dbDurum as dr ON dr.Id = iz.DurumId   
                              INNER JOIN dbUnvan as du ON du.Id = pr.PersonelUnvanID 
@@ -176,7 +176,7 @@ namespace WORK_PERMIT_SYSSTEM
                     break;
 
                 case 3:
-                    sorgu = @"SELECT pr.PersonelAdi + ' ' + pr.PersonelSoyadi as AdiSoyadi,iz.*,dr.DurumAdi,dr.DurumKodu,du.UnvanAdi,du.Id as 'UnvanID' FROM dbPersonelKullanici as pr 
+                    sorgu = @"SELECT pr.PersonelAdi || ' ' || pr.PersonelSoyadi as AdiSoyadi,iz.*,dr.DurumAdi,dr.DurumKodu,du.UnvanAdi,du.Id as 'UnvanID' FROM dbPersonelKullanici as pr 
                         INNER JOIN dbIzinler as iz ON pr.Id = iz.PersonelId
                         INNER JOIN dbDurum as dr ON dr.Id = iz.DurumId   
                         INNER JOIN dbUnvan as du ON du.Id = pr.PersonelUnvanID
@@ -184,7 +184,7 @@ namespace WORK_PERMIT_SYSSTEM
                     break;
 
                 case 4:
-                    sorgu = @"SELECT pr.PersonelAdi + ' ' + pr.PersonelSoyadi as AdiSoyadi,iz.*,dr.DurumAdi,dr.DurumKodu,du.UnvanAdi,du.Id as 'UnvanID' FROM dbPersonelKullanici as pr 
+                    sorgu = @"SELECT pr.PersonelAdi || ' ' || pr.PersonelSoyadi as AdiSoyadi,iz.*,dr.DurumAdi,dr.DurumKodu,du.UnvanAdi,du.Id as 'UnvanID' FROM dbPersonelKullanici as pr 
                       INNER JOIN dbIzinler as iz ON pr.Id = iz.PersonelId
                       INNER JOIN dbDurum as dr ON dr.Id = iz.DurumId   
                       INNER JOIN dbUnvan as du ON du.Id = pr.PersonelUnvanID
@@ -196,7 +196,7 @@ namespace WORK_PERMIT_SYSSTEM
             }
             
             DataTable dtTable = new DataTable();
-            dtTable = Utils.TabloGetir(sorgu);
+            dtTable = SQLiteUtils.TabloGetir(sorgu);
 
             if(dtTable != null && dtTable.Rows.Count > 0)
             {

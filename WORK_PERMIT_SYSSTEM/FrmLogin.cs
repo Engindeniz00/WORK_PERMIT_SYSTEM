@@ -26,9 +26,9 @@ namespace WORK_PERMIT_SYSSTEM
 
         private void KomboBoxBilgiGonder()
         {
-            string sorgu = @"SELECT dbPersonelKullanici.*,dbPersonelKullanici.PersonelAdi + ' ' + dbPersonelKullanici.PersonelSoyadi as PersonelKullaniciAdi FROM dbPersonelKullanici ORDER BY PersonelKullaniciAdi ASC";
+            string sorgu = @"SELECT dbPersonelKullanici.*,(dbPersonelKullanici.PersonelAdi || ' ' || dbPersonelKullanici.PersonelSoyadi) as PersonelKullaniciAdi FROM dbPersonelKullanici ORDER BY PersonelKullaniciAdi ASC";
             DataTable dtTable = new DataTable();
-            dtTable = Utils.TabloGetir(sorgu);
+            dtTable = SQLiteUtils.TabloGetir(sorgu);
             kullaniciKombox.DisplayMember = "PersonelKullaniciAdi";
             kullaniciKombox.ValueMember = "Id";           
             kullaniciKombox.DataSource = dtTable;

@@ -25,13 +25,13 @@ namespace WORK_PERMIT_SYSSTEM
 
         private void KomboboxVeriYukle()
         {
-            string sorgu = "SELECT * FROM dbDurum AS durum  WHERE durum.Id=2 OR DURUM.Id = 3 OR durum.Id = 1002 OR durum.Id = 1003";
+            string sorgu = "SELECT * FROM dbDurum AS durum  WHERE durum.Id=2 OR durum.Id = 3 OR durum.Id = 1002 OR durum.Id = 1003";
             DataTable dtTable = new DataTable();
-            dtTable = Utils.TabloGetir(sorgu);
+            dtTable = SQLiteUtils.TabloGetir(sorgu);
             onayKombox.DisplayMember = "DurumKodu";
             onayKombox.ValueMember = "Id";
-            onayKombox.DataSource = dtTable;
             onayKombox.SelectedIndex = -1;
+            onayKombox.DataSource = dtTable;
         }
 
         private void iptaButon_Click(object sender, EventArgs e)
@@ -49,6 +49,7 @@ namespace WORK_PERMIT_SYSSTEM
         private void onaylaButon_Click(object sender, EventArgs e)
         {
             string sorgu = "";
+            bool kont = false;
             if (Utils.personelUnvanId == 1)
             {
                 if (Convert.ToInt32(onayKombox.SelectedValue) == 1003)
@@ -57,8 +58,8 @@ namespace WORK_PERMIT_SYSSTEM
                     {
                         if (Utils.izinBelgeSelectedDurumID == 4)
                         {
-                            sorgu = string.Format(@"UPDATE dbIzinler SET dbIzinler.DurumId = 1003 WHERE dbIzinler.Id = {0}", Utils.izinBelgeSelectedIzinID);
-                            MessageBox.Show("İzin başarılı bir şekilde değiştirildi", "Onay", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            sorgu = string.Format(@"UPDATE dbIzinler SET DurumId = 1003 WHERE Id = {0}", Utils.izinBelgeSelectedIzinID);
+                            kont = true;
 
 
                             /***Burada böyle mi olması gerekiyor bir sorarsın ***/
@@ -99,7 +100,7 @@ namespace WORK_PERMIT_SYSSTEM
                         if (Utils.izinBelgeSelectedDurumID == 4 || Utils.izinBelgeSelectedDurumID == 2)
                         {
                             sorgu = string.Format(@"UPDATE dbIzinler SET dbIzinler.DurumId = 1003 WHERE dbIzinler.Id = {0}", Utils.izinBelgeSelectedIzinID);
-                            MessageBox.Show("İzin başarılı bir şekilde değiştirildi", "Onay", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            kont = true;
                         }
                         else
                         {
@@ -117,7 +118,8 @@ namespace WORK_PERMIT_SYSSTEM
                 {
                     if (Utils.izinBelgeSelectedDurumID == 4)
                     {
-                        sorgu = string.Format(@"UPDATE dbIzinler SET dbIzinler.DurumId = 2 WHERE dbIzinler.Id = {0}", Utils.izinBelgeSelectedIzinID);
+                        sorgu = string.Format(@"UPDATE dbIzinler SET DurumId = 2 WHERE Id = {0}", Utils.izinBelgeSelectedIzinID);
+                        kont = true;
                     }
                     else
                     {
@@ -137,8 +139,8 @@ namespace WORK_PERMIT_SYSSTEM
                 {
                     if (iptNedenText.Text.Length > 5)
                     {
-                        sorgu = string.Format(@"UPDATE dbIzinler SET dbIzinler.DurumId = 1003 WHERE dbIzinler.Id = {0}", Utils.izinBelgeSelectedIzinID);
-                        MessageBox.Show("İzin başarılı bir şekilde değiştirildi", "Onay", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        sorgu = string.Format(@"UPDATE dbIzinler SET DurumId = 1003 WHERE Id = {0}", Utils.izinBelgeSelectedIzinID);
+                        kont = true;
                     }
                     else
                     {
@@ -149,7 +151,8 @@ namespace WORK_PERMIT_SYSSTEM
                 }
                 else if(Convert.ToInt32(onayKombox.SelectedValue) == 3)
                 {
-                    sorgu = string.Format(@"UPDATE dbIzinler SET dbIzinler.DurumId = 3 WHERE dbIzinler.Id = {0}", Utils.izinBelgeSelectedIzinID);
+                    sorgu = string.Format(@"UPDATE dbIzinler SET DurumId = 3 WHERE Id = {0}", Utils.izinBelgeSelectedIzinID);
+                    kont = true;
                 }
 
                 else
@@ -164,8 +167,8 @@ namespace WORK_PERMIT_SYSSTEM
                 {
                     if (iptNedenText.Text.Length > 5)
                     {
-                        sorgu = string.Format(@"UPDATE dbIzinler SET dbIzinler.DurumId = 1003 WHERE dbIzinler.Id = {0}", Utils.izinBelgeSelectedIzinID);
-                        MessageBox.Show("İzin başarılı bir şekilde değiştirildi", "Onay", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        sorgu = string.Format(@"UPDATE dbIzinler SET DurumId = 1003 WHERE Id = {0}", Utils.izinBelgeSelectedIzinID);
+                        kont = true; 
                     }
                     else
                     {
@@ -176,7 +179,8 @@ namespace WORK_PERMIT_SYSSTEM
                 }
                 else if (Convert.ToInt32(onayKombox.SelectedValue) == 1002)
                 {
-                    sorgu = string.Format(@"UPDATE dbIzinler SET dbIzinler.DurumId = 1 WHERE dbIzinler.Id = {0}", Utils.izinBelgeSelectedIzinID);
+                    sorgu = string.Format(@"UPDATE dbIzinler SET DurumId = 1 WHERE Id = {0}", Utils.izinBelgeSelectedIzinID);
+                    kont = true;
                 }
 
                 else
@@ -185,7 +189,21 @@ namespace WORK_PERMIT_SYSSTEM
                 }
             }
 
-            Utils.SorguCalistir(sorgu);
+            if (kont)
+            {
+                if (SQLiteUtils.SorguCalistir(sorgu))
+                {
+                    MessageBox.Show("İzin başarılı bir şekilde değiştirildi", "Onay", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Hata", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Herhangi Bir Değişim Yapılmadı", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             Temizle();
             
         }
