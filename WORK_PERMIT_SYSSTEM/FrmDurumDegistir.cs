@@ -59,19 +59,7 @@ namespace WORK_PERMIT_SYSSTEM
                         if (Utils.izinBelgeSelectedDurumID == 4)
                         {
                             sorgu = string.Format(@"UPDATE dbIzinler SET DurumId = 1003 WHERE Id = {0}", Utils.izinBelgeSelectedIzinID);
-                            kont = true;
-
-
-                            /***Burada böyle mi olması gerekiyor bir sorarsın ***/
-
-                            //if(Utils.KullaniciId == Utils.izinBelgeSelectedPersonelID)
-                            //{
-                            //    sorgu = string.Format(@"UPDATE dbIzinler SET dbIzinler.DurumId = 1003 WHERE dbIzinler.Id = {0}", Utils.izinBelgeSelectedIzinID);
-                            //}
-                            //else
-                            //{
-                            //    MessageBox.Show("Sadece izin isteyen kişi iptal edebilir", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            //}
+                            kont = true;                           
                         }
                         else
                         {

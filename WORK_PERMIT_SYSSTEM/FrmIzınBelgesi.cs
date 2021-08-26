@@ -49,7 +49,7 @@ namespace WORK_PERMIT_SYSSTEM
             }
             else
             {
-                return;
+                return; 
             }
         }
 
@@ -230,6 +230,10 @@ namespace WORK_PERMIT_SYSSTEM
                     }
                 }
             }
+            else
+            {
+                kullaniciIzinListe.Items.Clear();
+            }
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -252,7 +256,9 @@ namespace WORK_PERMIT_SYSSTEM
             if(Utils.izinBelgeSelectedIndex > -1)
             {
                 FrmDurumDegistir frmDurumDegistir = new FrmDurumDegistir();
+                Hide();
                 frmDurumDegistir.ShowDialog();
+                Show();
                 FrmIzınBelgesi_Load(sender, e);
             }
             else

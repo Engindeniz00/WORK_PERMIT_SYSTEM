@@ -125,7 +125,7 @@ namespace WORK_PERMIT_SYSSTEM
 
         private void kullaniciKombox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(kullaniciKombox.SelectedIndex > 0)
+            if(kullaniciKombox.SelectedIndex >= 0)
             {
                 sifreText.Focus();
 
