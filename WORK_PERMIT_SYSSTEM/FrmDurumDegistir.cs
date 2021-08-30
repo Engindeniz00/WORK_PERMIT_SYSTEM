@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+// buraya comment attım. 
+
 namespace WORK_PERMIT_SYSSTEM
 {
     public partial class FrmDurumDegistir : Form
